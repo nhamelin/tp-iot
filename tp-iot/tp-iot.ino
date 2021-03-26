@@ -1,5 +1,6 @@
 int lumiere = 0;
 int Led = 9;
+String stringLumiere = "";
 
 void setup() {
   pinMode(Led, OUTPUT);
@@ -7,13 +8,24 @@ void setup() {
 }
 
 void loop() {
-  // PhotoResistance
-  lumiere = analogRead(A0);
-  Serial.println(lumiere);
-  // Led
-  digitalWrite(Led, HIGH);
-  delay(200);
-  digitalWrite(Led, LOW);
 
-  delay(300);
+  if (Serial.available()) {
+    delay(10);
+    while (Serial.available() > 0) {
+      lumiere = analogRead(A0);
+      Serial.println(lumiere);
+      
+      stringLumiere = String(lumiere);
+      Serial.print(stringLumiere);
+        
+      // Led
+      digitalWrite(Led, HIGH);
+      delay(200);
+      digitalWrite(Led, LOW);
+      
+      delay(300);
+    }
+    Serial.flush();
+  }
+  
 }
