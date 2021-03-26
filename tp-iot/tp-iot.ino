@@ -9,23 +9,24 @@ void setup() {
 
 void loop() {
 
+  lumiere = analogRead(A0);
+  Serial.println(lumiere);
+      
+  stringLumiere = String(lumiere);
+
   if (Serial.available()) {
     delay(10);
     while (Serial.available() > 0) {
-      lumiere = analogRead(A0);
-      Serial.println(lumiere);
-      
-      stringLumiere = String(lumiere);
-      Serial.print(stringLumiere);
-        
-      // Led
-      digitalWrite(Led, HIGH);
-      delay(200);
-      digitalWrite(Led, LOW);
-      
-      delay(300);
+        Serial.print(stringLumiere);
     }
     Serial.flush();
   }
+        
+  // Led
+  digitalWrite(Led, HIGH);
+  delay(200);
+  digitalWrite(Led, LOW);
+  
+  delay(300);
   
 }
